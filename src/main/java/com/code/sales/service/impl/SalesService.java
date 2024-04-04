@@ -80,7 +80,6 @@ public class SalesService implements ISalesService {
     }
 
 
-    // START GENAI@CHATGPT4
     @Override
     public Discount calculateDiscountOfferRule3(List<Integer> productPrices) {
         Collections.sort(productPrices, Collections.reverseOrder());
