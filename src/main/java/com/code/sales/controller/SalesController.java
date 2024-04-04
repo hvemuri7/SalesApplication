@@ -5,6 +5,7 @@ import com.code.sales.service.ISalesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,8 +30,8 @@ public class SalesController {
      * @param productPrices
      * @return Discount Object
      */
-    @PostMapping("/calculateDiscount")
-    public Discount calculateDiscount(@RequestBody List<Integer> productPrices) {
+    @PostMapping("/calculateDiscount/{offerRule}")
+    public Discount calculateDiscount(@RequestBody List<Integer> productPrices, @PathVariable int offerRule) {
 
         logger.debug("Received product prices {}" , productPrices);
 
@@ -42,6 +43,14 @@ public class SalesController {
             throw new IllegalArgumentException("Product prices cannot be Empty");
         }
 
-        return salesService.calculateDiscount(productPrices);
+        if(offerRule == 1) {
+            return salesService.calculateDiscount(productPrices);
+        } else if(offerRule == 2  ){
+            return salesService.calculateDiscountOfferRule2(productPrices);
+        } else if(offerRule == 3) {
+            return salesService.calculateDiscountOfferRule3(productPrices);
+        } else{
+            throw new IllegalArgumentException("Invalid Offer Rule");
+        }
     }
 }

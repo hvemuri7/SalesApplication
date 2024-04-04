@@ -14,4 +14,8 @@ public interface ISalesService {
 
     Discount calculateDiscount(List<Integer> productPrices);
 
+    Discount calculateDiscountOfferRule2(List<Integer> productPrices);
+
+    Discount calculateDiscountOfferRule3(List<Integer> productPrices);
+
 }
